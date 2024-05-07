@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\BookingController;
+use App\Http\Middleware\IsLoggingUser;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -20,4 +23,14 @@ Route::get('/hello',function(){
     return ('<h1> hello</h1>');
 
 });
+
+Route ::get('/home',function(){
+$name='john';
+$age=15;
+$students=['ali','ammar','omar','john'];
+return view('welcome')->with('passedName',$name)->with('age',$age)->with('Names',$students);
+});
+Route::get('/booking',BookingController::class . '@myFunction' );
+Route::get('/sayHello/{name}',BookingController::class . '@sayHello' );
+Route::get('/login/{user}',BookingController::class . '@login')->middleware(IsLoggingUser::class);
 
